@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqdbhxswmxcu3"]
+
+[ext_resource type="PackedScene" uid="uid://b3u43dyy1aq7k" path="res://Scenes/entities/objects/hittable_object.tscn" id="1_t7qvb"]
+[ext_resource type="Texture2D" uid="uid://bd348573k1fvk" path="res://Resources/Textures/objects/coffeStand/coffeStandFall_0001.png" id="2_76yhn"]
+[ext_resource type="Texture2D" uid="uid://b551pmkmke70u" path="res://Resources/Textures/objects/coffeStand/coffeStandFall_0002.png" id="3_71t47"]
+[ext_resource type="Texture2D" uid="uid://brar7pp50i35g" path="res://Resources/Textures/objects/coffeStand/coffeStandFall_0003.png" id="4_nnh33"]
+[ext_resource type="Texture2D" uid="uid://pqitcpwcw0j0" path="res://Resources/Textures/objects/coffeStand/coffeStandFall_0004.png" id="5_lugau"]
+[ext_resource type="Texture2D" uid="uid://bdna1s3huk1bj" path="res://Resources/Textures/objects/coffeStand/coffeStand.png" id="6_hsakm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8evh7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_76yhn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_71t47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nnh33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lugau")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hsakm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2y45"]
+size = Vector2(19, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx18t"]
+size = Vector2(23, 47)
+
+[node name="vaseStand" instance=ExtResource("1_t7qvb")]
+scareAmount = 150.0
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8evh7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(-2.5, 10)
+shape = SubResource("RectangleShape2D_q2y45")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-2.5, 9.5)
+shape = SubResource("RectangleShape2D_sx18t")

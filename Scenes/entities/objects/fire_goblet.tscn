@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://c48m73rscg8ef"]
+
+[ext_resource type="PackedScene" uid="uid://b3u43dyy1aq7k" path="res://Scenes/entities/objects/hittable_object.tscn" id="1_q5jo1"]
+[ext_resource type="Texture2D" uid="uid://nwg1qr4eba6l" path="res://Resources/Textures/objects/vaseStand/vaseStandFalling_0001.png" id="2_0xco2"]
+[ext_resource type="Texture2D" uid="uid://csci6ukio50ol" path="res://Resources/Textures/objects/vaseStand/vaseStandFalling_0002.png" id="3_7ecy5"]
+[ext_resource type="Texture2D" uid="uid://85ej5s4jqkni" path="res://Resources/Textures/objects/vaseStand/vaseStandFalling_0003.png" id="4_yxb4j"]
+[ext_resource type="Texture2D" uid="uid://bhiona6xho663" path="res://Resources/Textures/objects/vaseStand/vaseStandFalling_0004.png" id="5_vde4x"]
+[ext_resource type="Texture2D" uid="uid://dbq1p7qbhjto6" path="res://Resources/Textures/objects/vaseStand/vaseStand_0001.png" id="6_yaypc"]
+[ext_resource type="Texture2D" uid="uid://dhwomolbswd2c" path="res://Resources/Textures/objects/vaseStand/vaseStand_0002.png" id="7_r32qj"]
+[ext_resource type="Texture2D" uid="uid://bwx23ne1scamy" path="res://Resources/Textures/objects/vaseStand/vaseStand_0003.png" id="8_gusx8"]
+[ext_resource type="Texture2D" uid="uid://dqssvnx0bbntx" path="res://Resources/Textures/objects/vaseStand/vaseStand_0004.png" id="9_k4wxc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1d5fw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0xco2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7ecy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yxb4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vde4x")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_yaypc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_r32qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gusx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_k4wxc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cajgm"]
+size = Vector2(28, 41)
+
+[node name="FireGoblet" instance=ExtResource("1_q5jo1")]
+scareAmount = 100.0
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1d5fw")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-2, 10.5)
+shape = SubResource("RectangleShape2D_cajgm")

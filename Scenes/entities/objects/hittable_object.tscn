@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3u43dyy1aq7k"]
+
+[ext_resource type="PackedScene" uid="uid://ccb0t28wlahs0" path="res://Scenes/entities/entity.tscn" id="1_osl02"]
+[ext_resource type="Script" path="res://Scenes/entities/objects/hittable_object.gd" id="2_5atr2"]
+
+[node name="HittableObject" node_paths=PackedStringArray("resetTimer", "sprites") instance=ExtResource("1_osl02")]
+script = ExtResource("2_5atr2")
+resetTimer = NodePath("ResetTimer")
+sprites = NodePath("Sprite")
+scareAmount = 1.0
+
+[node name="Collision" parent="." index="1"]
+disabled = true
+
+[node name="ResetTimer" type="Timer" parent="." index="2"]
+wait_time = 8.0
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="." index="3"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

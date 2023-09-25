@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://b146lcmv8ic8n"]
+
+[ext_resource type="PackedScene" uid="uid://b3u43dyy1aq7k" path="res://Scenes/entities/objects/hittable_object.tscn" id="1_kq3s4"]
+[ext_resource type="Texture2D" uid="uid://eyjjvgtw3wyx" path="res://Resources/Textures/objects/candle/candleFalling_0001.png" id="2_o7wum"]
+[ext_resource type="Texture2D" uid="uid://ca5nfmdd7t8k1" path="res://Resources/Textures/objects/candle/candleFalling_0002.png" id="3_lmbys"]
+[ext_resource type="Texture2D" uid="uid://b5otjm68i3dxb" path="res://Resources/Textures/objects/candle/candleFalling_0003.png" id="4_wqsd1"]
+[ext_resource type="Texture2D" uid="uid://xltistrbu4f8" path="res://Resources/Textures/objects/candle/candle_0001.png" id="5_wlryb"]
+[ext_resource type="Texture2D" uid="uid://cgk2ysji1ep3d" path="res://Resources/Textures/objects/candle/candle_0002.png" id="6_e0eu6"]
+[ext_resource type="Texture2D" uid="uid://lm676wpivt1i" path="res://Resources/Textures/objects/candle/candle_0003.png" id="7_88n40"]
+[ext_resource type="Texture2D" uid="uid://dquja8jgbnrmf" path="res://Resources/Textures/objects/candle/candle_0004.png" id="8_bt7yr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ryj5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o7wum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lmbys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wqsd1")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wlryb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e0eu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_88n40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bt7yr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcp2m"]
+
+[node name="candle" instance=ExtResource("1_kq3s4")]
+scareAmount = 4.0
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_5ryj5")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-2, 22)
+shape = SubResource("RectangleShape2D_rcp2m")

@@ -1,0 +1,121 @@
+[gd_scene load_steps=19 format=3 uid="uid://bg5xtdqm5bai7"]
+
+[ext_resource type="PackedScene" uid="uid://ccb0t28wlahs0" path="res://Scenes/entities/entity.tscn" id="1_qx447"]
+[ext_resource type="Texture2D" uid="uid://bfrusm7lpro37" path="res://Resources/Textures/cultist_idle_0001.png" id="2_8oukx"]
+[ext_resource type="Script" path="res://Scenes/entities/Enemies/cultist.gd" id="2_vrpyv"]
+[ext_resource type="PackedScene" uid="uid://dxa327eaci7xr" path="res://Scenes/entities/PickUps/bullet_ammo.tscn" id="3_2vf5m"]
+[ext_resource type="Texture2D" uid="uid://brmdk0wjhac84" path="res://Resources/Textures/cultist_idle_0002.png" id="3_ts0i5"]
+[ext_resource type="Texture2D" uid="uid://jk6vbr5io2bl" path="res://Resources/Textures/cultistFalling_0001.png" id="4_ro2my"]
+[ext_resource type="Texture2D" uid="uid://u3juy1n1jx30" path="res://Resources/Textures/cultistFalling_0002.png" id="5_soi2y"]
+[ext_resource type="Texture2D" uid="uid://dthh81ytyxpnf" path="res://Resources/Textures/cultistFalling_0003.png" id="6_g5fkr"]
+[ext_resource type="Texture2D" uid="uid://l0e4epyau7iq" path="res://Resources/Textures/cultistFalling_0004.png" id="7_5vf26"]
+[ext_resource type="Texture2D" uid="uid://dbye2e135b7s4" path="res://Resources/Textures/cultistFalling_0005.png" id="8_p1450"]
+[ext_resource type="PackedScene" uid="uid://ceeas86w4e6b2" path="res://Scenes/entities/Player/gun.tscn" id="11_ykpie"]
+[ext_resource type="Texture2D" uid="uid://b32utbm6f43ur" path="res://Resources/Textures/alert.png" id="12_xrnjk"]
+[ext_resource type="Texture2D" uid="uid://b606yoaa5mqk3" path="res://Resources/Textures/stars_ow_0001.png" id="13_ehmgl"]
+[ext_resource type="Texture2D" uid="uid://bgnhv1bb1dfa8" path="res://Resources/Textures/stars_ow_0002.png" id="14_vrko8"]
+[ext_resource type="Texture2D" uid="uid://l1l28y8nugto" path="res://Resources/Textures/stars_ow_0003.png" id="15_5vjx1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a02qb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8oukx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ts0i5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ro2my")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_soi2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g5fkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5vf26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_p1450")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y1i2t"]
+radius = 17.0
+height = 54.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gtkmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ehmgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vrko8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5vjx1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cultist" node_paths=PackedStringArray("sprite", "dazedEffect", "enemyGun", "enemySight") groups=["Enemy"] instance=ExtResource("1_qx447")]
+collision_layer = 5
+script = ExtResource("2_vrpyv")
+sprite = NodePath("Sprite")
+dazedEffect = NodePath("dazedEffect")
+enemyGun = NodePath("gun")
+enemySight = NodePath("SightToPlayer")
+bulletAmmo = ExtResource("3_2vf5m")
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_a02qb")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(-2, 9)
+shape = SubResource("CapsuleShape2D_y1i2t")
+
+[node name="gun" parent="." index="2" instance=ExtResource("11_ykpie")]
+visible = false
+position = Vector2(-1, 12)
+EnemyCarriesThis = true
+
+[node name="SightToPlayer" type="RayCast2D" parent="." index="3"]
+position = Vector2(0, 15)
+target_position = Vector2(202, 3)
+
+[node name="AttackStateTimer" type="Timer" parent="." index="4"]
+wait_time = 8.0
+one_shot = true
+
+[node name="WanderCooldown" type="Timer" parent="." index="5"]
+wait_time = 5.0
+one_shot = true
+
+[node name="alert" type="Sprite2D" parent="." index="6"]
+visible = false
+position = Vector2(-31, 5)
+texture = ExtResource("12_xrnjk")
+
+[node name="dazedEffect" type="AnimatedSprite2D" parent="." index="7"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_gtkmh")
+autoplay = "default"
+frame_progress = 0.902323
+
+[connection signal="timeout" from="AttackStateTimer" to="." method="OnAttackStateTimerOut"]
+[connection signal="timeout" from="WanderCooldown" to="." method="_on_wander_cooldown_timeout"]

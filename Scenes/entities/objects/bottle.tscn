@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://mtowdqlsvm45"]
+
+[ext_resource type="PackedScene" uid="uid://b3u43dyy1aq7k" path="res://Scenes/entities/objects/hittable_object.tscn" id="1_dpxd8"]
+[ext_resource type="Texture2D" uid="uid://bx8q7s54n25ir" path="res://Resources/Textures/objects/bottleBroken.png" id="2_sp4h7"]
+[ext_resource type="Texture2D" uid="uid://ym58ptduqwto" path="res://Resources/Textures/objects/bloodBottle.png" id="3_1htun"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jtleo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sp4h7")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1htun")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1whn6"]
+
+[node name="bottle" instance=ExtResource("1_dpxd8")]
+scale = Vector2(2, 2)
+scareAmount = 35.0
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_jtleo")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_1whn6")

@@ -1,0 +1,48 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Cat Gun"
+run/main_scene="res://Scenes/main.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+config/icon="res://icon.svg"
+
+[autoload]
+
+UI="*res://Scenes/ui/ui_gameplay.tscn"
+Data="*res://Scripts/Data.gd"
+Lootlocker="*res://Scripts/Lootlocker.gd"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=768
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="Everything"
+2d_physics/layer_2="World"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Objects"
+2d_physics/layer_5="AreasHigh"
+2d_physics/layer_6="Player"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

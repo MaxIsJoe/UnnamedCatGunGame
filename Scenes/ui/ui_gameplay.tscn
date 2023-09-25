@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://beg3pt3ju51o"]
+
+[ext_resource type="Script" path="res://Scenes/ui/UI.gd" id="1_7j6fd"]
+
+[node name="UIGameplay" type="CanvasLayer" node_paths=PackedStringArray("speedBar")]
+script = ExtResource("1_7j6fd")
+speedBar = NodePath("Screen/ProgressBar")
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+metadata/_edit_lock_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Screen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -229.0
+offset_top = -27.0
+offset_right = 229.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 300.0
+value = 250.0
+show_percentage = false
+
+[node name="Amo" type="RichTextLabel" parent="Screen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -382.0
+offset_top = -56.0
+offset_right = -286.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center]Ammo: 6"
+
+[node name="sco" type="RichTextLabel" parent="Screen"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -736.0
+offset_top = -57.0
+offset_right = -429.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+bbcode_enabled = true
+text = "Score: 0"
+
+[connection signal="onAmmoChange" from="." to="." method="_on_on_ammo_change"]
+[connection signal="onScoreChange" from="." to="." method="_on_on_score_change"]

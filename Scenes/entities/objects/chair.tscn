@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpiwbenv557ro"]
+
+[ext_resource type="PackedScene" uid="uid://b3u43dyy1aq7k" path="res://Scenes/entities/objects/hittable_object.tscn" id="1_jfseg"]
+[ext_resource type="Texture2D" uid="uid://cs5saj5yv2day" path="res://Resources/Textures/objects/chair/chair.png" id="2_jw0bm"]
+[ext_resource type="Texture2D" uid="uid://d4efxhr2rsg33" path="res://Resources/Textures/objects/chair/chairFalling_0001.png" id="2_w4h6b"]
+[ext_resource type="Texture2D" uid="uid://cieb55btnjqy0" path="res://Resources/Textures/objects/chair/chairFalling_0002.png" id="3_5orh7"]
+[ext_resource type="Texture2D" uid="uid://bnqx1dgoxdagf" path="res://Resources/Textures/objects/chair/chairFalling_0003.png" id="4_x6ksn"]
+[ext_resource type="Texture2D" uid="uid://conc2r1vgy7nq" path="res://Resources/Textures/objects/chair/chairFalling_0004.png" id="5_c3w7b"]
+[ext_resource type="Texture2D" uid="uid://cexovkxgx41wh" path="res://Resources/Textures/objects/chair/chairFalling_0005.png" id="6_vphtu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihihm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w4h6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5orh7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x6ksn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c3w7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vphtu")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jw0bm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2larh"]
+size = Vector2(22, 43)
+
+[node name="Chair" instance=ExtResource("1_jfseg")]
+scareAmount = 50.0
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ihihm")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="ResetTimer" parent="." index="2"]
+wait_time = 11.0
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-1, 11.5)
+shape = SubResource("RectangleShape2D_2larh")

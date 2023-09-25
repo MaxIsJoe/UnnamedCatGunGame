@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxa327eaci7xr"]
+
+[ext_resource type="Texture2D" uid="uid://rkjdbqxd543i" path="res://Resources/Textures/bulletCasing.png" id="1_aquir"]
+[ext_resource type="Script" path="res://Scenes/entities/PickUps/bullet_ammo.gd" id="1_yny1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bajjc"]
+
+[node name="BulletAmmo" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_yny1o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bajjc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_aquir")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

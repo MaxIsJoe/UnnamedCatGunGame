@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnvxo5e7qupxc"]
+
+[ext_resource type="PackedScene" uid="uid://ccb0t28wlahs0" path="res://Scenes/entities/entity.tscn" id="1_qv6yn"]
+[ext_resource type="Script" path="res://Scenes/entities/Player/cat.gd" id="2_7lj58"]
+[ext_resource type="Texture2D" uid="uid://dx7opb7cad34a" path="res://Resources/Textures/cat_run_left_0001.png" id="3_hv6ws"]
+[ext_resource type="Texture2D" uid="uid://boutosug0q131" path="res://Resources/Textures/cat_run_left_0002.png" id="4_krivk"]
+[ext_resource type="Texture2D" uid="uid://be6hxr8firuvl" path="res://Resources/Textures/cat_run_left_0003.png" id="5_8snrk"]
+[ext_resource type="PackedScene" uid="uid://ceeas86w4e6b2" path="res://Scenes/entities/Player/gun.tscn" id="6_uigq4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5vgf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hv6ws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_krivk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8snrk")
+}],
+"loop": true,
+"name": &"run",
+"speed": 11.0
+}]
+
+[sub_resource type="Curve" id="Curve_shn2q"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -261.474), 0.0, 0.0, 0, 0, Vector2(0.983403, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdyvw"]
+radius = 17.0294
+
+[node name="Cat" node_paths=PackedStringArray("sprites", "runParticles", "gun", "runParticleLeftPostion", "runParticleRightPostion", "gunRightPostion", "gunLeftPostion") groups=["Player"] instance=ExtResource("1_qv6yn")]
+script = ExtResource("2_7lj58")
+sprites = NodePath("Sprite")
+runParticles = NodePath("CPUParticles2D")
+gun = NodePath("gun")
+runParticleLeftPostion = NodePath("RunSpringPoints2/Right")
+runParticleRightPostion = NodePath("RunSpringPoints2/Right2")
+gunRightPostion = NodePath("GunSpringPoints/Right")
+gunLeftPostion = NodePath("GunSpringPoints/Right2")
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_5vgf3")
+animation = &"run"
+frame_progress = 0.412301
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(1, 8)
+
+[node name="GunSpringPoints" type="Node2D" parent="." index="2"]
+
+[node name="Right" type="Marker2D" parent="GunSpringPoints" index="0"]
+position = Vector2(14, 0)
+
+[node name="Right2" type="Marker2D" parent="GunSpringPoints" index="1"]
+position = Vector2(-14, 0)
+
+[node name="RunSpringPoints2" type="Node2D" parent="." index="3"]
+
+[node name="Right" type="Marker2D" parent="RunSpringPoints2" index="0"]
+position = Vector2(7, 14)
+
+[node name="Right2" type="Marker2D" parent="RunSpringPoints2" index="1"]
+position = Vector2(-6, 14)
+
+[node name="gun" parent="." index="4" instance=ExtResource("6_uigq4")]
+position = Vector2(14, -2)
+collision_mask = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="5"]
+position = Vector2(7, 14)
+amount = 3
+lifetime = 0.35
+randomness = 0.26
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(1600, -980)
+angle_curve = SubResource("Curve_shn2q")
+scale_amount_max = 4.0
+
+[node name="HitEnter" type="Area2D" parent="." index="6"]
+collision_layer = 12
+
+[node name="Collision" type="CollisionShape2D" parent="HitEnter" index="0"]
+position = Vector2(1, 8)
+shape = SubResource("CircleShape2D_hdyvw")
+
+[connection signal="body_entered" from="HitEnter" to="." method="_on_hit_enter_body_entered"]

@@ -1,0 +1,160 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceeas86w4e6b2"]
+
+[ext_resource type="Texture2D" uid="uid://c3rcfyahc51tt" path="res://Resources/Textures/gun.png" id="1_0jewb"]
+[ext_resource type="Script" path="res://Scenes/entities/Player/gun.gd" id="1_aaijy"]
+[ext_resource type="PackedScene" uid="uid://t07asccfgbx1" path="res://Scenes/entities/Player/StartleArea.tscn" id="2_qrj5h"]
+[ext_resource type="Script" path="res://Scenes/entities/Player/GunRaycastHit.gd" id="3_n6dk0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ntq"]
+size = Vector2(24, 6)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ma0wa"]
+radius = 45.9683
+height = 273.997
+
+[node name="gun" type="CharacterBody2D" node_paths=PackedStringArray("RaycastHolder")]
+collision_layer = 0
+script = ExtResource("1_aaijy")
+RaycastHolder = NodePath("MuzzlePos/RaycastHolder")
+StartleTemplate = ExtResource("2_qrj5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_l0ntq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0jewb")
+
+[node name="MuzzlePos" type="Marker2D" parent="."]
+position = Vector2(12, -1)
+
+[node name="RaycastHolder" type="Node2D" parent="MuzzlePos"]
+
+[node name="RayCast2D" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(188.996, -25.0309)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D"]
+
+[node name="RayCast2D2" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(167.001, 5.97266)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D2"]
+
+[node name="RayCast2D3" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(196.006, 36.9679)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D3"]
+
+[node name="RayCast2D4" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(227.01, 61.9628)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D4"]
+
+[node name="RayCast2D5" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+position = Vector2(-1, -1)
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(288.017, 105.953)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D5"]
+
+[node name="RayCast2D6" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(296.005, 29.9515)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D6"]
+
+[node name="RayCast2D7" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(299.998, -10.0491)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D7"]
+
+[node name="RayCast2D8" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(301.989, -69.0494)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D8"]
+
+[node name="RayCast2D9" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(236.02, 119.961)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D9"]
+
+[node name="RayCast2D10" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(125.01, 57.9795)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D10"]
+
+[node name="RayCast2D11" type="RayCast2D" parent="MuzzlePos/RaycastHolder" node_paths=PackedStringArray("line")]
+rotation = 0.000163705
+enabled = false
+target_position = Vector2(223.009, 52.9635)
+collision_mask = 46
+collide_with_areas = true
+script = ExtResource("3_n6dk0")
+line = NodePath("../RayCast2D3/Line2D")
+
+[node name="Line2D" type="Line2D" parent="MuzzlePos/RaycastHolder/RayCast2D11"]
+
+[node name="PlayerHitbox" type="Area2D" parent="MuzzlePos"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MuzzlePos/PlayerHitbox"]
+position = Vector2(138, -1)
+rotation = 1.54667
+shape = SubResource("CapsuleShape2D_ma0wa")
